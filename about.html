@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          sans-serif;
+        background-color: #f8fafc;
+        color: #1e293b;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        line-height: 1.6;
+      }
+
+      /* Header & Nav */
+      header {
+        background-color: #0f172a;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      }
+
+      .navbar {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .nav-left {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+      }
+
+      .nav-left a {
+        color: #cbd5e1;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.95rem;
+        transition: color 0.2s;
+      }
+
+      .nav-left a:hover {
+        color: #ffffff;
+      }
+
+      .logo {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #38bdf8;
+      }
+
+      main {
+        flex: 1;
+        max-width: 800px;
+        margin: 2.5rem auto;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .about {
+        background-color: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 2.5rem 2rem;
+        text-align: center;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        transition:
+          transform 0.25s ease,
+          box-shadow 0.25s ease;
+      }
+
+      .about:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px -3px rgba(37, 99, 235, 0.12);
+      }
+
+      .about h1 {
+        color: #0f172a;
+        font-size: 2rem;
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+      }
+
+      .about p {
+        color: #64748b;
+        font-size: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="nav-left">
+          <div class="logo">ScoreScale</div>
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="about">
+        <h1>About My Project</h1>
+        <p>
+          Welcome to ScoreScale—a lightweight, easy-to-use CGPA calculator built
+          for Scaler students. Whether you're tracking your PSP scores,
+          mid-terms, or final projects, ScoreScale converts your continuous
+          assessment marks into an accurate CGPA estimate so you can focus on
+          learning and building without the hassle of manual calculations.
+        </p>
+        <p>
+          In this project, I learned many new things and grew by learning from
+          my mistakes.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>

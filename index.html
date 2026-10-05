@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ScoreScale CGPA Calculator</title>
+    <style>
+      /* Reset & Fonts */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          sans-serif;
+        background-color: #f8fafc;
+        color: #1e293b;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        line-height: 1.6;
+      }
+
+      /* Header & Nav */
+      header {
+        background-color: #0f172a;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      }
+
+      .navbar {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .nav-left {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+      }
+
+      .logo {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #38bdf8;
+      }
+
+      .nav-left a {
+        color: #cbd5e1;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.95rem;
+        transition: color 0.2s;
+      }
+
+      .nav-left a:hover {
+        color: #ffffff;
+      }
+
+      .btn-get-started {
+        background-color: #2563eb;
+        color: #ffffff;
+        padding: 0.6rem 1.2rem;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: all 0.2s ease;
+      }
+
+      .btn-get-started:hover {
+        background-color: #1d4ed8;
+      }
+
+      /* Container & Cards */
+      main {
+        flex: 1;
+        max-width: 800px;
+        width: 90%;
+        margin: 2.5rem auto;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .page-header,
+      .page-middle {
+        background-color: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 2.5rem 2rem;
+        text-align: center;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        transition:
+          transform 0.25s ease,
+          box-shadow 0.25s ease;
+      }
+
+      .page-header:hover,
+      .page-middle:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px -3px rgba(37, 99, 235, 0.12);
+      }
+
+      .page-header h1 {
+        color: #0f172a;
+        font-size: 2rem;
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+      }
+
+      .page-middle h2 {
+        color: #1e293b;
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 0.75rem;
+      }
+
+      .page-header p,
+      .page-middle p {
+        color: #64748b;
+        font-size: 1rem;
+      }
+
+      /* Footer */
+      .footer {
+        background-color: #0f172a;
+        color: #94a3b8;
+        text-align: center;
+        padding: 1.25rem;
+        margin-top: auto;
+        cursor: pointer;
+        user-select: none;
+      }
+
+      .footer:hover {
+        color: #ffffff;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="nav-left">
+          <div class="logo">ScoreScale</div>
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="nav-right">
+          <a href="calculator.html" class="btn-get-started">Get Started</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="page-header">
+        <h1>ScoreScale CGPA Calculator</h1>
+        <p>Easily calculate your semester CGPA with subject weightage.</p>
+      </section>
+
+      <section class="page-middle">
+        <h2>Welcome to ScoreScale.</h2>
+        <p>
+          This tool helps Scaler students calculate their CGPA based on subject
+          weightage.
+        </p>
+        <p>
+          Use the "Get started" button on the top right corner to calculate your
+          CGPA.
+        </p>
+      </section>
+    </main>
+
+    <footer class="footer" id="footer">
+      <p style="font-weight: 500">Made for Scaler students.</p>
+    </footer>
+
+    <script>
+      let clickCount = 0;
+      const footer = document.getElementById("footer");
+
+      footer.addEventListener("click", () => {
+        clickCount++;
+        if (clickCount === 5) {
+          alert("🎉 You found Me 😭. press ok");
+          alert("we have your CGPA 😏");
+          clickCount = 0;
+        }
+      });
+    </script>
+  </body>
+</html>

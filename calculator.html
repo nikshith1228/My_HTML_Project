@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ScoreScale CGPA Calculator</title>
+    <style>
+      /* Reset & Base Styles */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family:
+          "Inter",
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          sans-serif;
+        background-color: #f8fafc;
+        color: #1e293b;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        line-height: 1.6;
+      }
+
+      /* Header & Navigation */
+      header {
+        background-color: #0f172a;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .navbar {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .nav-left {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+      }
+
+      .logo {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #38bdf8;
+        letter-spacing: -0.5px;
+      }
+
+      .nav-left a {
+        color: #cbd5e1;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.95rem;
+        transition: color 0.2s ease;
+      }
+
+      .nav-left a:hover,
+      .nav-left a.active {
+        color: #ffffff;
+      }
+
+      .btn-get-started {
+        background-color: #2563eb;
+        color: #ffffff;
+        padding: 0.6rem 1.2rem;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: all 0.2s ease;
+        box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+      }
+
+      .btn-get-started:hover {
+        background-color: #1d4ed8;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+      }
+
+      /* Main Layout Container */
+      main {
+        flex: 1;
+        max-width: 850px;
+        width: 92%;
+        margin: 2.5rem auto;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      /* Top Header Card */
+      .page-header {
+        background-color: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 2.5rem 2rem;
+        text-align: center;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        transition:
+          transform 0.25s ease,
+          box-shadow 0.25s ease;
+      }
+
+      .page-header:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px -3px rgba(37, 99, 235, 0.12);
+        border-color: #cbd5e1;
+      }
+
+      .page-header h1 {
+        color: #0f172a;
+        font-size: 2.2rem;
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+      }
+
+      .page-header p {
+        color: #64748b;
+        font-size: 1.05rem;
+      }
+
+      /* Subject Cards Layout */
+      .calculator-section {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .subject-card {
+        background-color: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 1.75rem 2rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        transition:
+          transform 0.25s ease,
+          box-shadow 0.25s ease;
+      }
+
+      .subject-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 16px -2px rgba(37, 99, 235, 0.1);
+        border-color: #cbd5e1;
+      }
+
+      .subject-card h2 {
+        color: #0f172a;
+        font-size: 1.35rem;
+        font-weight: 700;
+        margin-bottom: 1.25rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #f1f5f9;
+      }
+
+      .grid-inputs {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1.25rem;
+      }
+
+      .input-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+      }
+
+      .input-group label {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #334155;
+      }
+
+      .input-group input {
+        width: 100%;
+        padding: 0.65rem 0.9rem;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        color: #0f172a;
+        background-color: #f8fafc;
+        outline: none;
+        transition: all 0.2s ease;
+      }
+
+      .input-group input:focus {
+        border-color: #2563eb;
+        background-color: #ffffff;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+      }
+
+      /* Calculate Action & Results Card */
+      .action-card {
+        background-color: #0f172a;
+        color: #ffffff;
+        border-radius: 12px;
+        padding: 2rem;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.25);
+      }
+
+      .btn-calculate {
+        background-color: #2563eb;
+        color: #ffffff;
+        border: none;
+        padding: 0.85rem 2.2rem;
+        font-size: 1.05rem;
+        font-weight: 700;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+      }
+
+      .btn-calculate:hover {
+        background-color: #1d4ed8;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(37, 99, 235, 0.45);
+      }
+
+      .result-display {
+        margin-top: 0.5rem;
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: #94a3b8;
+      }
+
+      .result-display span {
+        color: #38bdf8;
+        font-size: 2rem;
+        font-weight: 800;
+        margin-left: 0.5rem;
+      }
+
+      /* Footer */
+      .footer {
+        background-color: #0f172a;
+        color: #94a3b8;
+        text-align: center;
+        padding: 1.25rem;
+        margin-top: auto;
+        cursor: pointer;
+        user-select: none;
+        transition: color 0.2s ease;
+      }
+
+      .footer:hover {
+        color: #f8fafc;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation Header -->
+    <header>
+      <nav class="navbar">
+        <div class="nav-left">
+          <div class="logo">ScoreScale</div>
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="nav-right">
+          <a href="calculator.html" class="btn-get-started">Get Started</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Title Card -->
+      <section class="page-header">
+        <h1>CGPA Calculator</h1>
+        <p>Easily calculate your semester CGPA with subject weightage.</p>
+      </section>
+
+      <!-- Calculator Subject Cards -->
+      <section class="calculator-section">
+        <!-- Introduction to Computer Programming (ICP) -->
+        <div class="subject-card">
+          <h2>Introduction to Computer Programming (ICP)</h2>
+          <div class="grid-inputs">
+            <div class="input-group">
+              <label for="icp-a1">Assignment Test 1 :-</label>
+              <input
+                type="number"
+                id="icp-a1"
+                placeholder="Enter score"
+                min="0"
+                max="100"
+              />
+            </div>
+            <div class="input-group">
+              <label for="icp-mid">Mid Term :-</label>
+              <input
+                type="number"
+                id="icp-mid"
+                placeholder="Enter score"
+                min="0"
+                max="100"
+              />
+            </div>
+            <div class="input-group">
+              <label for="icp-a2">Assignment Test 2 :-</label>
+              <input
+                type="number"
+                id="icp-a2"
+                placeholder="Enter score"
+                min="0"
+                max="100"
+              />
+            </div>
+            <div class="input-group">
+              <label for="icp-end">End Term Exam :-</label>
+              <input
+                type="number"
+                id="icp-end"
+                placeholder="Enter score"
+                min="0"
+                max="100"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Maths for Programming -->
+        <div class="subject-card">
+          <h2>Maths for Programming</h2>
+          <div class="grid-inputs">
+            <div class="input-group">
+              <label for="math-a1">Assignment Test 1 :-</label>
+              <input
+                type="number"
+                id="math-a1"
+                placeholder="Enter score"
+                min="0"
+                max="100"
+              />
+            </div>
+            <div class="input-group">
+              <label for="math-mid">Mid Term :-</label>
+              <input
+                type="number"
+                id="math-mid"
+                placeholder="Enter score"
+                min="0"
+                max="100"
+              />
+            </div>
+            <div class="input-group">
+              <label for="math-a2">Assignment Test 2 :-</label>
+              <input
+                type="number"
+                id="math-a2"
+                placeholder="Enter score"
+                min="0"
+                max="100"
+              />
+            </div>
+            <div class="input-group">
+              <label for="math-end">End Term Exam :-</label>
+              <input
+                type="number"
+                id="math-end"
+                placeholder="Enter score"
+                min="0"
+                max="100"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Web Dev 101 -->
+        <div class="subject-card">
+          <h2>Web Dev 101</h2>
+          <div class="grid-inputs">
+            <div class="input-group">
+              <label for="web-psp">PSP :-</label>
+              <input
+                type="number"
+                id="web-psp"
+                placeholder="Enter score"
+                min="0"
+                max="100"
+              />
+            </div>
+            <div class="input-group">
+              <label for="web-mid">Mid Term :-</label>
+              <input
+                type="number"
+                id="web-mid"
+                placeholder="Enter score"
+                min="0"
+                max="100"
+              />
+            </div>
+            <div class="input-group">
+              <label for="web-end">End Term Exam :-</label>
+              <input
+                type="number"
+                id="web-end"
+                placeholder="Enter score"
+                min="0"
+                max="100"
+              />
+            </div>
+            <div class="input-group">
+              <label for="web-proj">End Term Project :-</label>
+              <input
+                type="number"
+                id="web-proj"
+                placeholder="Enter score"
+                min="0"
+                max="100"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Calculate Action Area -->
+        <div class="action-card">
+          <button type="button" class="btn-calculate" id="calcBtn">
+            Calculate CGPA
+          </button>
+          <div class="result-display">
+            Calculated CGPA: <span id="cgpaOutput">--</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" id="footer">
+      <p>Made for Scaler students.</p>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+      // CGPA Calculation Handler
+      document.getElementById("calcBtn").addEventListener("click", () => {
+        const inputs = document.querySelectorAll(
+          '.grid-inputs input[type="number"]',
+        );
+        let total = 0;
+        let count = 0;
+
+        inputs.forEach((input) => {
+          const val = parseFloat(input.value);
+          if (!isNaN(val)) {
+            total += val;
+            count++;
+          }
+        });
+
+        const outputSpan = document.getElementById("cgpaOutput");
+        if (count > 0) {
+          const avgScore = total / count;
+          const cgpa = (avgScore / 10).toFixed(2);
+          outputSpan.textContent = cgpa;
+        } else {
+          outputSpan.textContent = "0.00";
+        }
+      });
+
+      // Secret Easter Egg Handler
+      let clickCount = 0;
+      const footer = document.getElementById("footer");
+
+      footer.addEventListener("click", () => {
+        clickCount++;
+        if (clickCount === 5) {
+          alert("🎉 You found Me. press ok");
+          alert("we have your CGPA 😏");
+          clickCount = 0;
+        }
+      });
+    </script>
+  </body>
+</html>
